@@ -32,38 +32,70 @@ class GildedRose {
     }
 
     private void updateAgedBrie(Item item) {
-        if (item.quality < 50) {
-            item.quality++;
+        if (canIncreaseQuality(item)) {
+            increaseQuality(item);
         }
-        item.sellIn--;
-        if (item.sellIn < 0 && item.quality < 50) {
-            item.quality++;
+        decreaseSellIn(item);
+        if (isExpired(item) && canIncreaseQuality(item)) {
+            increaseQuality(item);
         }
     }
 
     private void updateBackstagePass(Item item) {
-        if (item.quality < 50) {
-            item.quality++;
-            if (item.sellIn < 11 && item.quality < 50) {
-                item.quality++;
+        if (canIncreaseQuality(item)) {
+            increaseQuality(item);
+            if (isSellInLessThan(item, 11) && canIncreaseQuality(item)) {
+                increaseQuality(item);
             }
-            if (item.sellIn < 6 && item.quality < 50) {
-                item.quality++;
+            if (isSellInLessThan(item, 6) && canIncreaseQuality(item)) {
+                increaseQuality(item);
             }
         }
-        item.sellIn--;
-        if (item.sellIn < 0) {
-            item.quality = 0;
+        decreaseSellIn(item);
+        if (isExpired(item)) {
+            resetQuality(item);
         }
     }
 
     private void updateNormalItem(Item item) {
-        if (item.quality > 0) {
-            item.quality--;
+        if (canDecreaseQuality(item)) {
+            decreaseQuality(item);
         }
+        decreaseSellIn(item);
+        if (isExpired(item) && canDecreaseQuality(item)) {
+            decreaseQuality(item);
+        }
+    }
+
+    private boolean canIncreaseQuality(Item item) {
+        return item.quality < 50;
+    }
+
+    private boolean canDecreaseQuality(Item item) {
+        return item.quality > 0;
+    }
+
+    private boolean isExpired(Item item) {
+        return item.sellIn < 0;
+    }
+
+    private boolean isSellInLessThan(Item item, int days) {
+        return item.sellIn < days;
+    }
+
+    private void increaseQuality(Item item) {
+        item.quality++;
+    }
+
+    private void decreaseQuality(Item item) {
+        item.quality--;
+    }
+
+    private void decreaseSellIn(Item item) {
         item.sellIn--;
-        if (item.sellIn < 0 && item.quality > 0) {
-            item.quality--;
-        }
+    }
+
+    private void resetQuality(Item item) {
+        item.quality = 0;
     }
 }
