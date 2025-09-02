@@ -18,8 +18,10 @@ export class BackstagePassHandler implements ItemHandler {
 
     ItemUtils.decreaseSellIn(item);
 
-    if (item.sellIn < 0) {
-      item.quality = 0;
+    if (ItemUtils.isExpired(item)) {
+      ItemUtils.resetQuality(item);
+    } else {
+      ItemUtils.enforceQualityBounds(item);
     }
   }
 }
