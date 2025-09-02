@@ -16,6 +16,7 @@ import { NormalItemHandler } from './handler/NormalItemHandler';
 import { AgedBrieHandler } from './handler/AgedBrieHandler';
 import { BackstagePassHandler } from './handler/BackstagePassHandler';
 import { SulfurasHandler } from './handler/SulfurasHandler';
+import { ConjuredItemHandler } from './handler/ConjuredItemHandler';
 
 export class GildedRose {
   items: Array<Item>;
@@ -29,6 +30,7 @@ export class GildedRose {
       new AgedBrieHandler(),
       new BackstagePassHandler(),
       new SulfurasHandler(),
+      new ConjuredItemHandler(),
     ];
 
     this.normalHandler = new NormalItemHandler();
