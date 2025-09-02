@@ -4,7 +4,7 @@ import { ItemUtils } from '../utility/ItemUtils';
 
 export class BackstagePassHandler implements ItemHandler {
   handles(item: Item): boolean {
-    return ItemUtils.isBackstagePass(item);
+    return item.name === 'Backstage passes to a TAFKAL80ETC concert';
   }
 
   updateItemQuality(item: Item): void {

@@ -4,7 +4,7 @@ import { ItemUtils } from '../utility/ItemUtils';
 
 export class AgedBrieHandler implements ItemHandler {
   handles(item: Item): boolean {
-    return ItemUtils.isAgedBrie(item);
+    return item.name === 'Aged Brie';
   }
 
   updateItemQuality(item: Item): void {
