@@ -150,4 +150,52 @@ class GildedRoseTest {
         assertEquals(0, items[0].quality);
     }
 
+    @Test
+    void updateQuality_ConjuredItem_ShouldDegradeTwiceAsFast() {
+        // Given
+        Item[] items = new Item[]{
+                new Item("Conjured Mana Cake", 10, 20)
+        };
+        GildedRose app = new GildedRose(items);
+
+        // When
+        app.updateQuality();
+
+        // Then
+        assertEquals(9, items[0].sellIn);
+        assertEquals(18, items[0].quality);
+    }
+
+    @Test
+    void updateQuality_ConjuredItem_ShouldDegradeFourPerDayWhenSellInPassed() {
+        // Given
+        Item[] items = new Item[]{
+                new Item("Conjured Mana Cake", 0, 20)
+        };
+        GildedRose app = new GildedRose(items);
+
+        // When
+        app.updateQuality();
+
+        // Then
+        assertEquals(-1, items[0].sellIn);
+        assertEquals(16, items[0].quality);
+    }
+
+    @Test
+    void updateQuality_ConjuredItem_ShouldNotGoNegative() {
+        // Given
+        Item[] items = new Item[]{
+                new Item("Conjured Mana Cake", 5, 1)
+        };
+        GildedRose app = new GildedRose(items);
+
+        // When
+        app.updateQuality();
+
+        // Then
+        assertEquals(4, items[0].sellIn);
+        assertEquals(0, items[0].quality);
+    }
+
 }

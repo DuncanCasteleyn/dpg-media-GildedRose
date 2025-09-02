@@ -6,6 +6,7 @@ public interface ItemHandler {
     ItemHandler DEFAULT_HANDLER = new NormalItemHandler();
 
     List<ItemHandler> HANDLERS = List.of(
+        new ConjuredItemHandler(),
         new AgedBrieHandler(),
         new BackstagePassHandler(),
         new SulfurasHandler()
