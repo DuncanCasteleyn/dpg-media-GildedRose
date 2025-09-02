@@ -11,10 +11,11 @@ export class AgedBrieHandler implements ItemHandler {
     if (item.quality < 50) {
       ItemUtils.increaseQuality(item);
     }
+
     ItemUtils.decreaseSellIn(item);
+
     if (item.sellIn < 0 && item.quality < 50) {
       ItemUtils.increaseQuality(item);
     }
-    item.quality = Math.min(50, item.quality);
   }
 }

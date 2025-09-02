@@ -17,7 +17,5 @@ export class NormalItemHandler implements ItemHandler {
     if (item.sellIn < 0 && item.quality > 0) {
       ItemUtils.decreaseQuality(item);
     }
-
-    item.quality = Math.max(0, item.quality);
   }
 }

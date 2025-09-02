@@ -17,7 +17,5 @@ export class ConjuredItemHandler implements ItemHandler {
     if (item.sellIn < 0 && item.quality > 0) {
       ItemUtils.decreaseQuality(item, 2);
     }
-
-    item.quality = Math.max(0, item.quality);
   }
 }
