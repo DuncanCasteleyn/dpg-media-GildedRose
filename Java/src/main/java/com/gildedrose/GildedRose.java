@@ -31,71 +31,40 @@ class GildedRose {
         }
     }
 
-    private void updateAgedBrie(Item item) {
-        if (canIncreaseQuality(item)) {
-            increaseQuality(item);
+    private static void updateAgedBrie(Item item) {
+        if (ItemUtilities.canIncreaseQuality(item)) {
+            ItemUtilities.increaseQuality(item);
         }
-        decreaseSellIn(item);
-        if (isExpired(item) && canIncreaseQuality(item)) {
-            increaseQuality(item);
+        ItemUtilities.decreaseSellIn(item);
+        if (ItemUtilities.isExpired(item) && ItemUtilities.canIncreaseQuality(item)) {
+            ItemUtilities.increaseQuality(item);
         }
     }
 
-    private void updateBackstagePass(Item item) {
-        if (canIncreaseQuality(item)) {
-            increaseQuality(item);
-            if (isSellInLessThan(item, 11) && canIncreaseQuality(item)) {
-                increaseQuality(item);
+    private static void updateBackstagePass(Item item) {
+        if (ItemUtilities.canIncreaseQuality(item)) {
+            ItemUtilities.increaseQuality(item);
+            if (ItemUtilities.isSellInLessThan(item, 11) && ItemUtilities.canIncreaseQuality(item)) {
+                ItemUtilities.increaseQuality(item);
             }
-            if (isSellInLessThan(item, 6) && canIncreaseQuality(item)) {
-                increaseQuality(item);
+            if (ItemUtilities.isSellInLessThan(item, 6) && ItemUtilities.canIncreaseQuality(item)) {
+                ItemUtilities.increaseQuality(item);
             }
         }
-        decreaseSellIn(item);
-        if (isExpired(item)) {
-            resetQuality(item);
+        ItemUtilities.decreaseSellIn(item);
+        if (ItemUtilities.isExpired(item)) {
+            ItemUtilities.resetQuality(item);
         }
     }
 
-    private void updateNormalItem(Item item) {
-        if (canDecreaseQuality(item)) {
-            decreaseQuality(item);
+    private static void updateNormalItem(Item item) {
+        if (ItemUtilities.canDecreaseQuality(item)) {
+            ItemUtilities.decreaseQuality(item);
         }
-        decreaseSellIn(item);
-        if (isExpired(item) && canDecreaseQuality(item)) {
-            decreaseQuality(item);
+        ItemUtilities.decreaseSellIn(item);
+        if (ItemUtilities.isExpired(item) && ItemUtilities.canDecreaseQuality(item)) {
+            ItemUtilities.decreaseQuality(item);
         }
     }
 
-    private boolean canIncreaseQuality(Item item) {
-        return item.quality < 50;
-    }
-
-    private boolean canDecreaseQuality(Item item) {
-        return item.quality > 0;
-    }
-
-    private boolean isExpired(Item item) {
-        return item.sellIn < 0;
-    }
-
-    private boolean isSellInLessThan(Item item, int days) {
-        return item.sellIn < days;
-    }
-
-    private void increaseQuality(Item item) {
-        item.quality++;
-    }
-
-    private void decreaseQuality(Item item) {
-        item.quality--;
-    }
-
-    private void decreaseSellIn(Item item) {
-        item.sellIn--;
-    }
-
-    private void resetQuality(Item item) {
-        item.quality = 0;
-    }
 }
